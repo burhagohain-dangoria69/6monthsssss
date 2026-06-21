@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>6 Months 🙀</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=DM+Serif+Display:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       ROOT TOKENS
+    ============================================================ */
+    :root {
+      --sky-50:  #f0f8ff;
+      --sky-100: #dceeff;
+      --sky-200: #bcdeff;
+      --sky-300: #93c9f5;
+      --sky-400: #60a9e8;
+      --ink:     #1a2535;
+      --ink-soft: #3a4a60;
+      --white:   #ffffff;
+      --glass-bg: rgba(255,255,255,0.48);
+      --glass-border: rgba(255,255,255,0.7);
+      --shadow-card: 0 16px 48px rgba(80,140,200,0.18);
+      --font-display: 'DM Serif Display', serif;
+      --font-hand:    'Caveat', cursive;
+      --font-body:    'Inter', sans-serif;
+      --section-pad: 80px 28px;
+      --radius-card: 20px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-body);
+      background: var(--sky-50);
+      color: var(--ink);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Film grain */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 9999; opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 180px 180px;
+    }
+
+    img { max-width: 100%; display: block; }
+    video { display: block; max-width: 100%; }
+
+    /* ============================================================
+       AMBIENT FLOATING LAYER — fixed, behind everything
+       Notes + chocofills + diet coke drift across the whole page
+    ============================================================ */
+    #ambient-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    /* Each ambient item wanders slowly across the viewport */
+    .ambient-item {
+      position: absolute;
+      opacity: 0;
+      will-change: transform, opacity;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    /* Sticky note style */
+    .ambient-note {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 10px 14px;
+      box-shadow: 0 6px 20px rgba(80,140,200,0.14), 2px 2px 0 rgba(147,201,245,0.25);
+      font-family: var(--font-hand);
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      border-left: 3px solid var(--sky-300);
+      max-width: 170px;
+      white-space: normal;
+      line-height: 1.4;
+      cursor: default;
+    }
+
+    /* Image floaters */
+    .ambient-img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+      filter: drop-shadow(0 4px 12px rgba(80,140,200,0.18));
+      border-radius: 10px;
+    }
+
+    /* Emoji floaters (fallback) */
+    .ambient-emoji {
+      font-size: 2.4rem;
+      filter: drop-shadow(0 4px 10px rgba(80,140,200,0.15));
+    }
+
+    /* ============================================================
+       UTILITY
+    ============================================================ */
+    .section {
+      padding: var(--section-pad);
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      z-index: 2; /* above ambient layer */
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ============================================================
+       SECTION 1 — HERO
+    ============================================================ */
+    #hero {
+      min-height: 100svh;
+      background: linear-gradient(160deg, #c8e8ff 0%, #dceeff 45%, #eef6ff 75%, #f7fbff 100%);
+      overflow: hidden;
+    }
+
+    .sky-blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(70px);
+      opacity: 0.45;
+      animation: blobDrift 14s ease-in-out infinite alternate;
+    }
+    .sky-blob:nth-child(1) { width: 300px; height: 300px; background: #a8d8f8; top: -90px; left: -70px; }
+    .sky-blob:nth-child(2) { width: 220px; height: 220px; background: #c0e0ff; top: 35%; right: -60px; animation-delay: 4s; }
+    .sky-blob:nth-child(3) { width: 170px; height: 170px; background: #b4d8f8; bottom: 8%; left: 5%; animation-delay: 8s; }
+
+    @keyframes blobDrift {
+      from { transform: translate(0,0) scale(1); }
+      to   { transform: translate(18px, 22px) scale(1.1); }
+    }
+
+    /* hero dots */
+    .hero-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(130,180,230,0.45);
+      animation: heroDotFloat 9s ease-in-out infinite;
+    }
+    @keyframes heroDotFloat {
+      0%,100% { transform: translateY(0) scale(1); opacity:0.45; }
+      50%      { transform: translateY(-36px) scale(1.4); opacity:0.75; }
+    }
+
+    .hero-content {
+      position: relative; z-index: 2;
+      text-align: center; padding: 0 28px;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--font-hand);
+      font-size: 1rem; color: var(--sky-400);
+      letter-spacing: 0.18em; text-transform: uppercase;
+      margin-bottom: 22px;
+      opacity: 0; animation: fadeUp 1s ease 0.4s forwards;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 12vw, 4.4rem);
+      color: var(--ink); line-height: 1.05;
+      opacity: 0; animation: fadeUp 1s ease 0.75s forwards;
+    }
+
+    .hero-sub {
+      font-family: var(--font-hand);
+      font-size: clamp(1.1rem, 4.5vw, 1.45rem);
+      color: var(--ink-soft); margin-top: 18px; line-height: 1.55;
+      opacity: 0; animation: fadeUp 1s ease 1.05s forwards;
+    }
+
+    .hero-btn {
+      display: inline-block; margin-top: 44px;
+      padding: 15px 42px;
+      background: linear-gradient(135deg, var(--sky-300), var(--sky-400));
+      color: var(--white);
+      font-family: var(--font-body); font-size: 0.95rem; font-weight: 500;
+      letter-spacing: 0.06em; border: none; border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(96,169,232,0.38);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+      opacity: 0; animation: fadeUp 1s ease 1.35s forwards;
+    }
+    .hero-btn:hover, .hero-btn:active {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 16px 36px rgba(96,169,232,0.48);
+    }
+
+    @keyframes fadeUp {
+      from { opacity:0; transform: translateY(20px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    /* scroll caret */
+    .scroll-caret {
+      position: absolute; bottom: 32px; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      opacity: 0; animation: fadeUp 1s ease 2.2s forwards;
+    }
+    .scroll-caret-line {
+      width: 1px; height: 32px;
+      background: linear-gradient(to bottom, var(--sky-300), transparent);
+    }
+    .scroll-caret-label {
+      font-family: var(--font-hand); font-size: 0.75rem; color: var(--sky-400);
+      letter-spacing: 0.1em;
+    }
+
+    /* ============================================================
+       SECTION 2 — OPENING
+    ============================================================ */
+    #opening {
+      background: linear-gradient(180deg, #eef6ff 0%, #f7fbff 100%);
+      text-align: center; min-height: 100svh;
+    }
+
+    .cin-line {
+      font-family: var(--font-display);
+      font-size: clamp(1.45rem, 5.5vw, 2.05rem);
+      color: var(--ink); line-height: 1.6;
+      opacity:0; transition: opacity 1.3s ease, transform 1.3s ease;
+      transform: translateY(22px); margin: 8px 0;
+    }
+    .cin-hand {
+      font-family: var(--font-hand);
+      font-size: clamp(1.9rem, 7.5vw, 2.8rem); color: var(--sky-400);
+      opacity:0; transition: opacity 1.3s ease, transform 1.3s ease;
+      transform: translateY(22px); margin: 4px 0;
+    }
+    .cin-amp {
+      font-family: var(--font-display); font-style: italic;
+      font-size: clamp(1.6rem, 6vw, 2.3rem); color: var(--sky-300);
+      display: block; margin: 6px 0;
+      opacity:0; transition: opacity 1.3s ease;
+    }
+    .cin-small {
+      font-family: var(--font-hand);
+      font-size: clamp(1rem, 4vw, 1.3rem); color: #7aaccc;
+      opacity:0; transition: opacity 1.3s ease, transform 1.3s ease;
+      transform: translateY(12px); margin-top: 18px; letter-spacing: 0.08em;
+    }
+    .cin-visible { opacity:1 !important; transform: translateY(0) !important; }
+    .cin-block { margin-bottom: 44px; }
+
+    /* ============================================================
+       SECTION 3 — MEMORY LANE (stacked single column)
+    ============================================================ */
+    #memory-lane {
+      background: linear-gradient(180deg, #f7fbff 0%, #dceeff 100%);
+      min-height: auto;
+      padding: 80px 24px;
+    }
+
+    .section-eyebrow {
+      font-family: var(--font-hand);
+      font-size: 1.05rem; color: var(--sky-400);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 52px; text-align: center;
+    }
+
+    /* Each photo gets its own full-screen-ish "moment" */
+    .polaroid-moment {
+      min-height: 70svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 0;
+    }
+
+    .polaroid {
+      background: var(--white);
+      padding: 14px 14px 44px;
+      border-radius: 3px;
+      box-shadow: 0 14px 48px rgba(80,140,200,0.16), 0 2px 8px rgba(0,0,0,0.06);
+      width: 100%; max-width: 290px;
+      transform: rotate(var(--tilt, 0deg));
+      transition: transform 0.35s ease, box-shadow 0.35s ease;
+      position: relative;
+    }
+    .polaroid:hover, .polaroid:focus-within {
+      transform: rotate(0deg) scale(1.03);
+      box-shadow: 0 24px 64px rgba(80,140,200,0.25);
+    }
+
+    .polaroid img {
+      width: 100%; aspect-ratio: 1/1; object-fit: cover;
+      border-radius: 2px;
+      background: linear-gradient(135deg, var(--sky-100), var(--sky-200));
+    }
+    .photo-placeholder {
+      width: 100%; aspect-ratio: 1/1; border-radius: 2px;
+      background: linear-gradient(135deg, #c8e4f8, #b0d4f0);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+    .polaroid-caption {
+      font-family: var(--font-hand);
+      font-size: 1.1rem; color: var(--ink-soft);
+      text-align: center;
+      position: absolute; bottom: 12px; left: 0; right: 0;
+    }
+
+    /* Little number marker beside each photo */
+    .polaroid-num {
+      font-family: var(--font-hand);
+      font-size: 0.85rem; color: var(--sky-300);
+      letter-spacing: 0.1em; margin-bottom: 16px;
+      text-align: center; text-transform: uppercase;
+    }
+
+    /* ============================================================
+       SECTION 4 — DOODLE
+    ============================================================ */
+    #doodle {
+      background: linear-gradient(180deg, #dceeff 0%, #eef6ff 100%);
+      text-align: center;
+    }
+    .doodle-title {
+      font-family: var(--font-hand);
+      font-size: clamp(1.2rem, 5vw, 1.65rem);
+      color: var(--ink-soft); max-width: 300px; line-height: 1.55;
+      margin-bottom: 44px;
+    }
+    .doodle-img-wrap {
+      animation: floatDoodle 7s ease-in-out infinite;
+      max-width: 280px; margin: 0 auto;
+    }
+    .doodle-img-wrap img {
+      border-radius: 18px;
+      box-shadow: 0 24px 64px rgba(80,140,200,0.2);
+    }
+    .doodle-placeholder {
+      width: 240px; height: 240px;
+      background: linear-gradient(135deg, #c8e4f8, #a8ccec);
+      border-radius: 18px; display: flex; align-items: center;
+      justify-content: center; font-size: 4rem;
+      box-shadow: 0 24px 64px rgba(80,140,200,0.2); margin: 0 auto;
+    }
+    @keyframes floatDoodle {
+      0%,100% { transform: translateY(0) rotate(-0.6deg); }
+      50%      { transform: translateY(-16px) rotate(0.6deg); }
+    }
+
+    /* ============================================================
+       SECTION 5 — VIDEO
+    ============================================================ */
+    #video-section {
+      background: linear-gradient(180deg, #eef6ff 0%, #f0f8ff 100%);
+      text-align: center;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.7rem, 6vw, 2.3rem); color: var(--ink);
+      margin-bottom: 10px; text-align: center;
+    }
+    .section-sub {
+      font-family: var(--font-hand);
+      font-size: 1rem; color: var(--sky-400);
+      text-align: center; margin-bottom: 48px;
+    }
+    .video-wrap {
+      width: 100%; max-width: 320px;
+      border-radius: 22px; overflow: hidden;
+      box-shadow: 0 24px 64px rgba(80,140,200,0.22); margin: 0 auto;
+    }
+    .video-wrap video { width: 100%; border-radius: 22px; }
+    .video-placeholder {
+      width: 100%; max-width: 320px; aspect-ratio: 9/16;
+      background: linear-gradient(160deg, #b8d8f4, #90c0e8);
+      border-radius: 22px; display: flex; align-items: center;
+      justify-content: center; font-size: 4rem; margin: 0 auto;
+      box-shadow: 0 24px 64px rgba(80,140,200,0.22);
+    }
+    .video-caption {
+      font-family: var(--font-hand); font-size: 1.1rem;
+      color: var(--ink-soft); margin-top: 24px;
+    }
+
+    /* ============================================================
+       SECTION 6 — FLIP CARDS — ONE BY ONE (full scroll)
+    ============================================================ */
+    #little-things { background: linear-gradient(180deg, #f0f8ff 0%, #dceeff 100%); }
+
+    /* Each card gets its own moment — no grid */
+    .flip-moment {
+      min-height: 80svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      width: 100%;
+      padding: 40px 0;
+    }
+
+    .flip-moment-label {
+      font-family: var(--font-hand);
+      font-size: 0.85rem; color: var(--sky-400);
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .flip-card {
+      perspective: 900px;
+      width: 220px; height: 220px;
+      cursor: pointer;
+    }
+    .flip-inner {
+      position: relative; width: 100%; height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.75s cubic-bezier(0.4,0.2,0.2,1);
+    }
+    .flip-card.flipped .flip-inner { transform: rotateY(180deg); }
+
+    .flip-front, .flip-back {
+      position: absolute; inset: 0;
+      backface-visibility: hidden; -webkit-backface-visibility: hidden;
+      border-radius: var(--radius-card);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center; padding: 20px;
+    }
+    .flip-front {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(14px);
+      box-shadow: var(--shadow-card);
+    }
+    .flip-back {
+      background: linear-gradient(145deg, #60a9e8, #93c9f5);
+      color: var(--white);
+      transform: rotateY(180deg);
+      box-shadow: var(--shadow-card);
+    }
+    .flip-front img { width: 90px; height: 90px; object-fit: contain; margin-bottom: 12px; }
+    .flip-emoji { font-size: 3.5rem; margin-bottom: 12px; }
+    .flip-front-label {
+      font-family: var(--font-hand); font-size: 1rem; color: var(--ink-soft);
+      text-align: center;
+    }
+    .flip-back-text {
+      font-family: var(--font-hand); font-size: 1.25rem;
+      text-align: center; line-height: 1.45;
+    }
+    .flip-tap-hint {
+      font-size: 0.62rem; font-family: var(--font-body);
+      color: var(--sky-400); position: absolute;
+      bottom: 10px; letter-spacing: 0.05em;
+    }
+    .flip-hint {
+      font-size: 0.62rem; font-family: var(--font-body);
+      color: rgba(255,255,255,0.65); position: absolute;
+      bottom: 10px; letter-spacing: 0.05em;
+    }
+
+    /* pulse hint on first load */
+    @keyframes gentlePulse {
+      0%,100% { box-shadow: 0 16px 48px rgba(80,140,200,0.18); }
+      50%      { box-shadow: 0 20px 60px rgba(96,169,232,0.32); }
+    }
+    .flip-card:not(.flipped) .flip-inner { animation: gentlePulse 3s ease-in-out infinite; }
+
+    /* ============================================================
+       SECTION 7 — NO LONGER A DEDICATED SECTION
+       Notes are now ambient floating items on the fixed layer.
+       We remove Section 7 as a section and instead add a
+       short divider/transition strip.
+    ============================================================ */
+    #notes-bridge {
+      background: linear-gradient(180deg, #dceeff 0%, #eef6ff 100%);
+      min-height: 50svh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 60px 28px;
+      position: relative; z-index: 2;
+    }
+    .bridge-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.6rem, 6vw, 2.2rem); color: var(--ink);
+      margin-bottom: 10px;
+    }
+    .bridge-sub {
+      font-family: var(--font-hand);
+      font-size: 1rem; color: var(--sky-400); margin-top: 6px;
+    }
+
+    /* ============================================================
+       SECTION 8 — FINAL MESSAGE
+    ============================================================ */
+    #final-msg {
+      background: linear-gradient(180deg, #eef6ff 0%, #f7fbff 100%);
+      text-align: center; min-height: 100svh;
+    }
+    .final-counter {
+      font-family: var(--font-display);
+      font-size: clamp(2.2rem, 9vw, 3.6rem); color: var(--sky-400);
+      margin-bottom: 8px;
+    }
+    .final-text {
+      font-family: var(--font-hand);
+      font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+      color: var(--ink-soft); line-height: 1.75;
+      max-width: 300px; text-align: center;
+    }
+    .final-divider {
+      width: 60px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--sky-300), transparent);
+      margin: 32px auto;
+    }
+    .cta-btn {
+      display: inline-block; margin-top: 52px;
+      padding: 15px 46px;
+      background: linear-gradient(135deg, var(--sky-300), var(--sky-400));
+      color: var(--white);
+      font-family: var(--font-body); font-size: 0.95rem; font-weight: 500;
+      letter-spacing: 0.06em; border: none; border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 32px rgba(96,169,232,0.42);
+      transition: transform 0.22s ease, box-shadow 0.22s ease, opacity 0.35s ease;
+      opacity: 0;
+    }
+    .cta-btn.visible { opacity: 1; }
+    .cta-btn:hover, .cta-btn:active {
+      transform: translateY(-3px) scale(1.04);
+      box-shadow: 0 18px 40px rgba(96,169,232,0.52);
+    }
+
+    /* ============================================================
+       SECTION 9 — FINAL SURPRISE
+    ============================================================ */
+    #final-surprise {
+      position: fixed; inset: 0; z-index: 1000;
+      background: linear-gradient(160deg, #c8e4ff 0%, #dff0ff 50%, #f0f8ff 100%);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 24px;
+      opacity: 0; pointer-events: none;
+      transition: opacity 1.6s ease; overflow: hidden; text-align: center;
+    }
+    #final-surprise.active { opacity: 1; pointer-events: all; }
+
+    .particle {
+      position: absolute;
+      border-radius: 50%; pointer-events: none;
+      animation: particleDrift var(--dur, 8s) ease-in-out infinite; opacity: 0;
+    }
+    @keyframes particleDrift {
+      0%   { transform: translate(0,0) scale(0); opacity:0; }
+      20%  { opacity: 0.75; }
+      80%  { opacity: 0.4; }
+      100% { transform: translate(var(--tx,40px), var(--ty,-80px)) scale(1.5); opacity:0; }
+    }
+
+    .collage-wrap {
+      position: relative; width: 300px; height: 300px;
+      margin: 0 auto 32px; flex-shrink: 0;
+    }
+    .collage-photo {
+      position: absolute; width: 122px; height: 122px;
+      object-fit: cover; border-radius: 13px;
+      border: 3px solid var(--white);
+      box-shadow: 0 8px 28px rgba(80,140,200,0.22);
+      opacity: 0; transform: scale(0.5) translateY(36px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+      background: linear-gradient(135deg, #c0ddf8, #a0c8f0);
+    }
+    .collage-photo:nth-child(1) { top:0;    left:0;   transition-delay:.2s; }
+    .collage-photo:nth-child(2) { top:0;    right:0;  transition-delay:.4s; }
+    .collage-photo:nth-child(3) { bottom:0; left:0;   transition-delay:.6s; }
+    .collage-photo:nth-child(4) { bottom:0; right:0;  transition-delay:.8s; }
+    .collage-center {
+      position: absolute; top:50%; left:50%;
+      transform: translate(-50%,-50%) scale(0.2);
+      width:110px; height:110px; object-fit:cover; border-radius:50%;
+      border:4px solid var(--white);
+      box-shadow: 0 14px 40px rgba(80,140,200,0.28);
+      opacity:0; transition: opacity 1s ease 1.3s, transform 1s ease 1.3s;
+      background: linear-gradient(135deg,#b0ccf0,#90aee8); z-index:2;
+    }
+    #final-surprise.active .collage-photo { opacity:1; transform:scale(1) translateY(0) rotate(var(--r,0deg)) !important; }
+    #final-surprise.active .collage-photo:nth-child(1) { --r:-3deg; }
+    #final-surprise.active .collage-photo:nth-child(2) { --r: 2deg; }
+    #final-surprise.active .collage-photo:nth-child(3) { --r: 2.5deg; }
+    #final-surprise.active .collage-photo:nth-child(4) { --r:-2deg; }
+    #final-surprise.active .collage-center { opacity:1; transform:translate(-50%,-50%) scale(1); }
+
+    .surprise-text {
+      font-family: var(--font-hand);
+      font-size: clamp(1.15rem, 4.5vw, 1.45rem);
+      color: var(--ink-soft); line-height: 1.7; max-width: 300px;
+      opacity:0; transform:translateY(22px);
+      transition: opacity 1s ease 2.1s, transform 1s ease 2.1s;
+    }
+    #final-surprise.active .surprise-text { opacity:1; transform:translateY(0); }
+
+    .surprise-close {
+      margin-top:36px; padding:10px 30px;
+      background:transparent; border:1px solid var(--sky-300); border-radius:50px;
+      color:var(--sky-400); font-family:var(--font-body); font-size:0.85rem;
+      cursor:pointer; opacity:0; transition: opacity 0.8s ease 3.2s;
+    }
+    #final-surprise.active .surprise-close { opacity:1; }
+    .surprise-close:hover { background: var(--sky-100); }
+
+    /* ============================================================
+       AUDIO INDICATOR
+    ============================================================ */
+    #audio-indicator {
+      position:fixed; top:18px; right:18px; z-index:500;
+      display:none; align-items:center; gap:8px;
+      background:rgba(255,255,255,0.72); backdrop-filter:blur(14px);
+      border-radius:50px; padding:8px 14px;
+      box-shadow:0 4px 18px rgba(80,140,200,0.13); cursor:pointer;
+    }
+    #audio-indicator.show { display:flex; }
+    .bars { display:flex; align-items:flex-end; gap:2px; height:16px; }
+    .bar  { width:3px; background:var(--sky-400); border-radius:2px; animation:barPulse 0.8s ease-in-out infinite alternate; }
+    .bar:nth-child(1){height:8px;  animation-delay:0s;}
+    .bar:nth-child(2){height:14px; animation-delay:.15s;}
+    .bar:nth-child(3){height:10px; animation-delay:.3s;}
+    .bar:nth-child(4){height:16px; animation-delay:.1s;}
+    @keyframes barPulse { from{transform:scaleY(0.5);} to{transform:scaleY(1);} }
+    .audio-label { font-family:var(--font-body); font-size:0.7rem; color:var(--ink-soft); letter-spacing:.05em; }
+
+    /* ============================================================
+       RESPONSIVE
+    ============================================================ */
+    @media (max-width: 380px) {
+      :root { --section-pad: 60px 18px; }
+      .flip-card { width: 190px; height: 190px; }
+      .collage-wrap { width: 260px; height: 260px; }
+      .collage-photo { width: 104px; height: 104px; }
+      .collage-center { width: 94px; height: 94px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     AMBIENT FLOATING LAYER — drifts across the whole page at all times
+     Notes, diet coke, choco fills float here.
+     Clicking a note opens it (JS toggles an .open class)
+============================================================ -->
+<div id="ambient-layer" aria-hidden="true"></div>
+
+<!-- ============================================================
+     AUDIO
+============================================================ -->
+<audio id="bg-music" src="assets/music/see_you_again.mp3" loop preload="none"></audio>
+
+<div id="audio-indicator" title="Click to toggle music">
+  <div class="bars">
+    <div class="bar"></div><div class="bar"></div>
+    <div class="bar"></div><div class="bar"></div>
+  </div>
+  <span class="audio-label">playing</span>
+</div>
+
+<!-- ============================================================
+     FINAL SURPRISE OVERLAY (Section 9)
+============================================================ -->
+<div id="final-surprise" aria-hidden="true">
+  <div class="collage-wrap">
+    <img class="collage-photo" src="assets/photos/photo1.jpg" alt=""
+         onerror="this.style.background='linear-gradient(135deg,#c0ddf8,#a0c8f0)';this.removeAttribute('src')" />
+    <img class="collage-photo" src="assets/photos/photo2.jpg" alt=""
+         onerror="this.style.background='linear-gradient(135deg,#b4d8f4,#90c4ec)';this.removeAttribute('src')" />
+    <img class="collage-photo" src="assets/photos/photo3.jpg" alt=""
+         onerror="this.style.background='linear-gradient(135deg,#a8cef0,#84bae8)';this.removeAttribute('src')" />
+    <img class="collage-photo" src="assets/photos/photo4.jpg" alt=""
+         onerror="this.style.background='linear-gradient(135deg,#b0d4f4,#8cc0ec)';this.removeAttribute('src')" />
+    <img class="collage-center" src="assets/doodles/us.png" alt=""
+         onerror="this.style.background='linear-gradient(135deg,#b0ccf0,#90aee8)';this.removeAttribute('src')" />
+  </div>
+  <!-- EDIT final surprise text below -->
+  <p class="surprise-text">
+    i thought kiba koru<br/>
+    so i made this little gift for ya phagli :3<br/><br/>
+    happy 6 months mur pagoli joni 😘❤️
+  </p>
+  <button class="surprise-close" onclick="closeSurprise()">close</button>
+</div>
+
+<!-- ============================================================
+     SECTION 1 — HERO
+============================================================ -->
+<section id="hero" class="section">
+  <div class="sky-blob"></div>
+  <div class="sky-blob"></div>
+  <div class="sky-blob"></div>
+  <div id="hero-dots"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">six months · a little story</div>
+    <!-- EDIT hero text below -->
+    <h1 class="hero-title">Phaaaaagliiiiii</h1>
+    <p class="hero-sub">We accidentally completed 6 monthsss behhh 🙀🙀</p>
+    <button class="hero-btn" id="hero-btn" onclick="startJourney()">Tap Here</button>
+  </div>
+
+  <div class="scroll-caret">
+    <div class="scroll-caret-line"></div>
+    <div class="scroll-caret-label">scroll</div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 2 — OPENING
+============================================================ -->
+<section id="opening" class="section">
+  <div style="max-width:340px;width:100%;text-align:center;">
+    <div class="cin-block">
+      <!-- EDIT opening text -->
+      <p class="cin-line" id="cin-1">a story that started</p>
+      <p class="cin-line" id="cin-2">6 months ago</p>
+    </div>
+    <div class="cin-block">
+      <p class="cin-line" id="cin-3">Starring</p>
+      <p class="cin-hand" id="cin-4">Mishi</p>
+      <span class="cin-amp" id="cin-5">&amp;</span>
+      <p class="cin-hand" id="cin-6">Thakuriaa</p>
+    </div>
+    <div class="cin-block">
+      <p class="cin-small" id="cin-7">still running...</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 3 — MEMORY LANE
+     Each photo is its own scroll moment
+============================================================ -->
+<section id="memory-lane" class="section" style="min-height:auto; padding-bottom:0;">
+  <p class="section-eyebrow reveal">— memory lane —</p>
+</section>
+
+<!-- Photo 1 -->
+<div class="polaroid-moment" style="background:linear-gradient(180deg,#f7fbff,#ecf6ff);">
+  <p class="polaroid-num reveal"></p>
+  <div class="polaroid reveal" style="--tilt:-1.5deg;">
+    <img src="assets/photos/photo1.jpg" alt="Memory 1"
+         onerror="this.outerHTML='<div class=\'photo-placeholder\'>📷</div>'" />
+    <!-- EDIT caption -->
+    <div class="polaroid-caption">amar first photo ekelogee</div>
+  </div>
+</div>
+
+<!-- Photo 2 -->
+<div class="polaroid-moment" style="background:linear-gradient(180deg,#ecf6ff,#dceeff);">
+  <p class="polaroid-num reveal"></p>
+  <div class="polaroid reveal" style="--tilt:1.3deg;">
+    <img src="assets/photos/photo2.jpg" alt="Memory 2"
+         onerror="this.outerHTML='<div class=\'photo-placeholder\'>📷</div>'" />
+    <div class="polaroid-caption">❤️‍🩹</div>
+  </div>
+</div>
+
+<!-- Photo 3 -->
+<div class="polaroid-moment" style="background:linear-gradient(180deg,#dceeff,#e8f4ff);">
+  <p class="polaroid-num reveal"></p>
+  <div class="polaroid reveal" style="--tilt:-0.8deg;">
+    <img src="assets/photos/photo3.jpg" alt="Memory 3"
+         onerror="this.outerHTML='<div class=\'photo-placeholder\'>📷</div>'" />
+    <div class="polaroid-caption">special one🥹🥹</div>
+  </div>
+</div>
+
+<!-- Photo 4 -->
+<div class="polaroid-moment" style="background:linear-gradient(180deg,#e8f4ff,#f0f8ff);">
+  <p class="polaroid-num reveal"></p>
+  <div class="polaroid reveal" style="--tilt:1.8deg;">
+    <img src="assets/photos/photo4.jpg" alt="Memory 4"
+         onerror="this.outerHTML='<div class=\'photo-placeholder\'>📷</div>'" />
+    <div class="polaroid-caption">😹😹😹</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     SECTION 4 — DOODLE
+============================================================ -->
+<section id="doodle" class="section">
+  <!-- EDIT text below -->
+  <p class="doodle-title reveal">
+    One of my favourite pictures of us,<br/>
+    that doesn't even exist 🥹
+  </p>
+  <div class="doodle-img-wrap reveal">
+    <img src="assets/doodles/us.png" alt="Us doodle"
+         onerror="this.outerHTML='<div class=\'doodle-placeholder\'>🎨</div>'" />
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 5 — VIDEO MEMORY
+============================================================ -->
+<section id="video-section" class="section">
+  <div class="reveal" style="margin-bottom:32px;">
+    <h2 class="section-title">a little memory</h2>
+  </div>
+  <div class="reveal">
+    <div class="video-wrap">
+      <video src="assets/videos/memory.mp4"
+             autoplay muted loop playsinline preload="none"
+             onerror="this.outerHTML='<div class=\'video-placeholder\'>🎬</div>'">
+      </video>
+    </div>
+    <!-- EDIT caption -->
+    <p class="video-caption">ain't forgetting thiss 😭😭😭</p>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION 6 — FLIP CARDS — one card per scroll moment
+============================================================ -->
+<section id="little-things" class="section" style="min-height:auto;padding-bottom:0;">
+  <h2 class="section-title reveal" style="margin-bottom:8px;">little things about you</h2>
+  <p class="section-sub reveal">tap each one ✦</p>
+</section>
+
+<!-- Card 1: Diet Coke -->
+<div class="flip-moment" style="background:linear-gradient(180deg,#dceeff,#e8f4ff);">
+  <p class="flip-moment-label reveal"></p>
+  <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front">
+        <img src="assets/cards/diet_coke.png" alt="Diet Coke"
+             onerror="this.outerHTML='<div class=\'flip-emoji\'>🥤</div>'" />
+        <span class="flip-front-label">Diet Coke</span>
+        <span class="flip-tap-hint">tap →</span>
+      </div>
+      <div class="flip-back">
+        <!-- EDIT back text -->
+        <span class="flip-back-text">your second greatest love.</span>
+        <span class="flip-hint">tap ←</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 2: Choco Fills -->
+<div class="flip-moment" style="background:linear-gradient(180deg,#e8f4ff,#f0f8ff);">
+  <p class="flip-moment-label reveal"></p>
+  <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front">
+        <img src="assets/cards/choco_fills.png" alt="Choco Fills"
+             onerror="this.outerHTML='<div class=\'flip-emoji\'>🍫</div>'" />
+        <span class="flip-front-label">Choco Fills</span>
+        <span class="flip-tap-hint">tap →</span>
+      </div>
+      <div class="flip-back">
+        <span class="flip-back-text">of course</span>
+        <span class="flip-hint">tap ←</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 3: See You Again -->
+<div class="flip-moment" style="background:linear-gradient(180deg,#f0f8ff,#e8f4ff);">
+  <p class="flip-moment-label reveal"></p>
+  <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front">
+        <img src="assets/cards/see_you_again.png" alt="See You Again"
+             onerror="this.outerHTML='<div class=\'flip-emoji\'>🎵</div>'" />
+        <span class="flip-front-label">See You Again</span>
+        <span class="flip-tap-hint">tap →</span>
+      </div>
+      <div class="flip-back">
+        <span class="flip-back-text">our anthem?</span>
+        <span class="flip-hint">tap ←</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Card 4: Anime -->
+<div class="flip-moment" style="background:linear-gradient(180deg,#e8f4ff,#dceeff);">
+  <p class="flip-moment-label reveal"></p>
+  <div class="flip-card reveal" onclick="this.classList.toggle('flipped')">
+    <div class="flip-inner">
+      <div class="flip-front">
+        <img src="assets/cards/anime.png" alt="Anime"
+             onerror="this.outerHTML='<div class=\'flip-emoji\'>🌸</div>'" />
+        <span class="flip-front-label">Anime</span>
+        <span class="flip-tap-hint">tap →</span>
+      </div>
+      <div class="flip-back">
+        <span class="flip-back-text">sayegaa sayegaa oti xunkalee</span>
+        <span class="flip-hint">tap ←</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     SECTION 8 — FINAL MESSAGE
+============================================================ -->
+<section id="final-msg" class="section">
+  <div style="max-width:320px;width:100%;">
+    <!-- EDIT final message text below -->
+    <p class="final-counter reveal">6 months.</p>
+    <p class="final-counter reveal" style="font-size:clamp(1.5rem,6vw,2.4rem);color:var(--sky-300);">182 days.</p>
+    <div class="final-divider"></div>
+    <p class="final-text reveal">
+      countless hours in calls.<br/>
+      countless memories.<br/><br/>
+      fevaret part of the day is yu 🥹.
+    </p>
+    <div style="text-align:center;">
+      <button class="cta-btn" id="final-cta" onclick="triggerSurprise()">
+        One More Thing
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script>
+/* ============================================================
+   AMBIENT FLOATING SYSTEM
+   Notes + images drift slowly across the whole fixed viewport.
+   They spawn one at a time, with long random delays between them.
+   Clicking a note "opens" it with a expand animation.
+============================================================ */
+
+// --- NOTES DATA (EDIT THESE) ---
+const NOTES = [
+  "phaaggliiii😹😹",
+  "pituu pituuuu dimm😘",
+  "duduu khaaaamm👅",
+  "diettt cokeeeee :33",
+  "muaaaaahhhhh💋"
+];
+
+// --- IMAGE FLOATERS ---
+const IMAGE_FLOATERS = [
+  { src: 'assets/cards/diet_coke.png',   emoji: '🥤' },
+  { src: 'assets/cards/choco_fills.png', emoji: '🍫' },
+];
+
+// Pool of all ambient items (notes + images)
+const ambientPool = [];
+let ambientLayer;
+
+function buildAmbientPool() {
+  ambientLayer = document.getElementById('ambient-layer');
+
+  // Create note elements
+  NOTES.forEach((text, i) => {
+    const el = document.createElement('div');
+    el.className = 'ambient-item ambient-note';
+    el.innerHTML = text;
+    el.dataset.index = i;
+
+    // Click to expand/collapse
+    el.addEventListener('click', () => el.classList.toggle('open'));
+
+    ambientLayer.appendChild(el);
+    ambientPool.push({ el, type: 'note' });
+  });
+
+  // Create image floaters
+  IMAGE_FLOATERS.forEach(({ src, emoji }) => {
+    const el = document.createElement('div');
+    el.className = 'ambient-item';
+
+    const img = document.createElement('img');
+    img.className = 'ambient-img';
+    img.src = src;
+    img.alt = '';
+    img.onerror = () => {
+      el.removeChild(img);
+      const em = document.createElement('span');
+      em.className = 'ambient-emoji';
+      em.textContent = emoji;
+      el.appendChild(em);
+    };
+    el.appendChild(img);
+    ambientLayer.appendChild(el);
+    ambientPool.push({ el, type: 'img' });
+  });
+
+  // Shuffle pool so order is random
+  for (let i = ambientPool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [ambientPool[i], ambientPool[j]] = [ambientPool[j], ambientPool[i]];
+  }
+}
+
+/* Launch a single ambient item on a slow, wandering journey.
+   Each item:
+   1. Starts at a random edge/corner
+   2. Floats gently toward a random target position
+   3. Fades in, lingers, fades out
+   4. Re-queues itself after a long random pause
+*/
+function launchAmbientItem(itemObj, delay) {
+  setTimeout(() => {
+    const { el } = itemObj;
+
+    // Random start — mostly edges
+    const edge = Math.floor(Math.random() * 4); // 0=top 1=right 2=bottom 3=left
+    const vw = window.innerWidth;
+    const vh = window.innerHeight;
+    let startX, startY;
+    switch (edge) {
+      case 0: startX = Math.random() * vw; startY = -120; break;
+      case 1: startX = vw + 80;  startY = Math.random() * vh; break;
+      case 2: startX = Math.random() * vw; startY = vh + 120; break;
+      case 3: startX = -120; startY = Math.random() * vh; break;
+    }
+
+    // Random target — somewhere inside the viewport
+    const targetX = 30 + Math.random() * (vw - 200);
+    const targetY = 80 + Math.random() * (vh - 220);
+
+    // Duration — slow and dreamy
+    const floatDur  = 12000 + Math.random() * 10000; // 12-22s drift
+    const lingerDur = 6000  + Math.random() * 8000;  // 6-14s visible
+    const fadeDur   = 2200;
+
+    // Position and show
+    el.style.cssText = `
+      left: ${startX}px;
+      top: ${startY}px;
+      opacity: 0;
+      transition: transform ${floatDur}ms cubic-bezier(0.25,0.46,0.45,0.94),
+                  opacity   ${fadeDur}ms ease;
+      transform: translate(0,0) rotate(${(Math.random()-0.5)*8}deg);
+      z-index: 1;
+      pointer-events: all;
+    `;
+
+    // Force reflow
+    el.getBoundingClientRect();
+
+    // Float to target
+    const dx = targetX - startX;
+    const dy = targetY - startY;
+    const tilt = (Math.random() - 0.5) * 6;
+    el.style.transform = `translate(${dx}px, ${dy}px) rotate(${tilt}deg)`;
+    el.style.opacity = '0.88';
+
+    // Fade out after lingering
+    setTimeout(() => {
+      el.style.opacity = '0';
+      // After fade out, reset and re-queue with a long delay
+      setTimeout(() => {
+        el.style.transition = 'none';
+        el.style.transform = 'translate(0,0)';
+        el.style.opacity = '0';
+        // Re-launch with a big pause (not too frequent)
+        launchAmbientItem(itemObj, 18000 + Math.random() * 24000);
+      }, fadeDur + 100);
+    }, floatDur * 0.65 + lingerDur);
+
+  }, delay);
+}
+
+function initAmbient() {
+  buildAmbientPool();
+  // Stagger each item's first launch widely — not too frequent
+  ambientPool.forEach((item, i) => {
+    launchAmbientItem(item, 3000 + i * (8000 + Math.random() * 6000));
+  });
+}
+
+/* ============================================================
+   HERO DOTS
+============================================================ */
+(function() {
+  const c = document.getElementById('hero-dots');
+  for (let i = 0; i < 16; i++) {
+    const d = document.createElement('div');
+    d.className = 'hero-dot';
+    const s = 3 + Math.random() * 6;
+    d.style.cssText = `
+      width:${s}px; height:${s}px;
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      animation-delay:${Math.random()*9}s;
+      animation-duration:${7+Math.random()*6}s;
+      opacity:${0.3+Math.random()*0.4};
+    `;
+    c.appendChild(d);
+  }
+})();
+
+/* ============================================================
+   MUSIC + START
+============================================================ */
+const music = document.getElementById('bg-music');
+const audioIndicator = document.getElementById('audio-indicator');
+let musicStarted = false;
+
+function startJourney() {
+  if (!musicStarted) {
+    music.volume = 0.55;
+    music.play().catch(() => {});
+    musicStarted = true;
+    audioIndicator.classList.add('show');
+  }
+  document.getElementById('opening').scrollIntoView({ behavior: 'smooth' });
+}
+
+audioIndicator.addEventListener('click', () => {
+  if (music.paused) {
+    music.play().catch(() => {});
+    audioIndicator.querySelector('.audio-label').textContent = 'playing';
+  } else {
+    music.pause();
+    audioIndicator.querySelector('.audio-label').textContent = 'paused';
+  }
+});
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ============================================================
+   CINEMATIC OPENING
+============================================================ */
+const cinEls = ['cin-1','cin-2','cin-3','cin-4','cin-5','cin-6','cin-7'].map(id => document.getElementById(id));
+const delays = [0, 650, 1700, 2550, 2950, 3350, 4450];
+let cinPlayed = false;
+
+function playCinematic() {
+  if (cinPlayed) return;
+  cinPlayed = true;
+  cinEls.forEach((el, i) => {
+    setTimeout(() => { if (el) el.classList.add('cin-visible'); }, delays[i]);
+  });
+}
+
+const cinObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) playCinematic(); });
+}, { threshold: 0.3 });
+cinObs.observe(document.getElementById('opening'));
+
+/* ============================================================
+   FINAL CTA FADE-IN
+============================================================ */
+const finalCta = document.getElementById('final-cta');
+const ctaObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) setTimeout(() => finalCta.classList.add('visible'), 700);
+  });
+}, { threshold: 0.4 });
+ctaObs.observe(finalCta);
+
+/* ============================================================
+   FINAL SURPRISE
+============================================================ */
+const surpriseEl = document.getElementById('final-surprise');
+
+function spawnParticles() {
+  const colours = ['#93c9f5','#bcdeff','#dceeff','#60a9e8','#a8d4f8','#ffffff'];
+  for (let i = 0; i < 45; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const sz = 4 + Math.random() * 7;
+    p.style.cssText = `
+      left:${Math.random()*100}%; top:${Math.random()*100}%;
+      background:${colours[Math.floor(Math.random()*colours.length)]};
+      --tx:${(Math.random()-0.5)*130}px;
+      --ty:${-65-Math.random()*90}px;
+      --dur:${5+Math.random()*9}s;
+      animation-delay:${Math.random()*4}s;
+      width:${sz}px; height:${sz}px;
+    `;
+    surpriseEl.appendChild(p);
+  }
+}
+
+function triggerSurprise() {
+  spawnParticles();
+  surpriseEl.classList.add('active');
+  surpriseEl.setAttribute('aria-hidden','false');
+  document.body.style.overflow = 'hidden';
+  if (musicStarted && !music.paused) {
+    let v = music.volume;
+    const r = setInterval(() => {
+      v = Math.min(v + 0.02, 0.78); music.volume = v;
+      if (v >= 0.78) clearInterval(r);
+    }, 100);
+  }
+}
+
+function closeSurprise() {
+  surpriseEl.classList.remove('active');
+  surpriseEl.setAttribute('aria-hidden','true');
+  document.body.style.overflow = '';
+  if (musicStarted && !music.paused) {
+    let v = music.volume;
+    const r = setInterval(() => {
+      v = Math.max(v - 0.02, 0.55); music.volume = v;
+      if (v <= 0.55) clearInterval(r);
+    }, 100);
+  }
+}
+
+surpriseEl.addEventListener('click', function(e) {
+  if (e.target === this) closeSurprise();
+});
+
+/* ============================================================
+   INIT AMBIENT
+============================================================ */
+// Small delay so page loads first
+setTimeout(initAmbient, 1500);
+
+/* ============================================================
+   PRELOAD IMAGES
+============================================================ */
+[
+  'assets/photos/photo1.jpg','assets/photos/photo2.jpg',
+  'assets/photos/photo3.jpg','assets/photos/photo4.jpg',
+  'assets/doodles/us.png',
+  'assets/cards/diet_coke.png','assets/cards/choco_fills.png',
+  'assets/cards/see_you_again.png','assets/cards/anime.png',
+].forEach(src => { const i = new Image(); i.src = src; });
+</script>
+</body>
+</html>
